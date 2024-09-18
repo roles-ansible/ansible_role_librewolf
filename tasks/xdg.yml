@@ -1,0 +1,11 @@
+---
+- name: Set default web browser to LibreWolf for each user
+  become: true
+  ansible.builtin.command: >
+    sudo -u {{ item.user }} xdg-settings set default-web-browser librewolf.desktop
+  environment:
+    DISPLAY: ":0"
+    HOME: "{{ item.home | default('/home/' ~ item.user) }}"
+  loop: "{{ librewolf__xdg_settings_user }}"
+  ignore_errors: true
+  changed_when: _libreoffice_install.changed

@@ -1,0 +1,15 @@
+---
+- name: Update apt repo-cache on debian/ubuntu hosts
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 0
+  when:
+    - ansible_pkg_mgr == "apt"
+
+- name: Install the package
+  become: true
+  ansible.builtin.package:
+    name: 'librewolf'
+    state: 'present'
+  register: _libreoffice_install

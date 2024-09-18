@@ -1,0 +1,40 @@
+---
+- name: "Pulling list of packages that are already installed"
+  ansible.builtin.package_facts:
+    manager: "auto"
+
+- name: Update apt repo-cache on debian/ubuntu hosts
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when:
+    - ansible_pkg_mgr == "apt"
+
+- name: Install requirements to add packages via https
+  become: true
+  ansible.builtin.apt:
+    package:
+      - apt-transport-https
+    state: present
+
+- name: Download repo signing key
+  become: true
+  ansible.builtin.get_url:
+    checksum: "{{ librewolf__keyring_hash }}"
+    url: "{{ librewolf__keyring }}"
+    dest: /usr/share/keyrings/librewolf.gpg
+    mode: '644'
+    owner: root
+    group: root
+  when: "'librewolf' not in ansible_facts.packages and ansible_os_family == 'Debian'"
+
+- name: Add repo to list of sources
+  become: true
+  ansible.builtin.template:
+    source: 'templates/librewolf.sources.j2'
+    dest: '/etc/apt/sources.list.d/librewolf.sources'
+    mode: '644'
+    owner: 'root'
+    group: 'root'
+  when: "'librewolf' not in ansible_facts.packages and ansible_os_family == 'Debian'"

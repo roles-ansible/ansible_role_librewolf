@@ -1,3 +1,8 @@
 ---
+librewolf__keyring_hash: 'sha256:4f438df8a84241e921edd26f164d1926e200ec3e36b1b330285242777ea3c693'
+librewolf__keyring: 'https://deb.librewolf.net/keyring.gpg'
+librewolf__xdg_settings: false
+librewolf__xdg_settings_user: []
+
 # should we do a version check? (recomended)
 submodules_versioncheck: false
