@@ -1,7 +1,12 @@
-[![Ansible Galaxy](https://ansible.l3d.space/svg/$namespace.$role.svg)](https://galaxy.ansible.com/ui/standalone/roles/$namespace/$role/)
-[![BSD-3 Clause](https://ansible.l3d.space/svg/$namespace.$role_license.svg)](LICENSE)
-[![Maintainance](https://ansible.l3d.space/svg/$namespace.$role_maintainance.svg)](https://ansible.l3d.space/#$namespace.$role)
+[![Ansible Galaxy](https://ansible.l3d.space/svg/l3d.linux.librewolf_ansible-role.svg)](https://galaxy.ansible.com/ui/repo/published/l3d/linux/content/role/librewolf/)
+[![BSD-3 Clause](https://ansible.l3d.space/svg/l3d.packages_license.svg)](LICENSE)
+[![Maintainance](https://ansible.l3d.space/svg/l3d.packages_maintainance.svg)](https://ansible.l3d.space/#l3d.linux)
 
- ansible_role_template
+ Librewolf ansible role
 =======================
-Template for Ansible roles
+
+THis ansible role installs librewolf, a firefox fork, on linux. It is part of the l3d.liux collection
+
+```
+WORK IN PROGRESS
+```
