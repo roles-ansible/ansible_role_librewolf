@@ -7,5 +7,5 @@
     DISPLAY: ":0"
     HOME: "{{ item.home | default('/home/' ~ item.user) }}"
   loop: "{{ librewolf__xdg_settings_user }}"
-  ignore_errors: true
+  failed_when: false
   changed_when: _libreoffice_install.changed
