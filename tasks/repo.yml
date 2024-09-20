@@ -32,7 +32,7 @@
 - name: Add repo to list of sources
   become: true
   ansible.builtin.template:
-    source: 'templates/librewolf.sources.j2'
+    src: 'templates/librewolf.sources.j2'
     dest: '/etc/apt/sources.list.d/librewolf.sources'
     mode: '644'
     owner: 'root'
