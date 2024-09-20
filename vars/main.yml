@@ -1,4 +1,4 @@
 ---
 # versionscheck
-playbook_version_number: 04
-playbook_version_path: 'l3d.linuc.librewolf.version'
+playbook_version_number: 5
+playbook_version_path: 'l3d.linux.librewolf.version'
