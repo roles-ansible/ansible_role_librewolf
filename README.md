@@ -18,3 +18,10 @@ This ansible role installs librewolf, a firefox fork, on linux. It is part of th
 | ``librewolf__xdg_settings_user[].user`` | | Username to set default browser |
 | ``librewolf__xdg_settings_user[].home`` | ``/home/ ~ user`` | Home of User to set default browser |
 | ``submodules_versioncheck`` | ``false`` | Optionally run versionscheck |
+
+## Requirements
+
+This role uses the ``l3d.linux.extrepo`` module for extrepo on debian based systems using apt.
+
+## Author
++ L3D [@l3d@chaos.social](https://chaos.social/@l3d)
