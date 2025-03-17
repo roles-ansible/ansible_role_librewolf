@@ -14,27 +14,28 @@
 - name: Install requirements to add packages via https
   become: true
   ansible.builtin.apt:
-    package:
-      - apt-transport-https
+    package: "{{ item }}"
     state: present
+  loop:
+    - "apt-transport-https"
+    - "extrepo"
 
-- name: Download repo signing key
+- name: Enable librewolf via extrepo
   become: true
-  ansible.builtin.get_url:
-    checksum: "{{ librewolf__keyring_hash }}"
-    url: "{{ librewolf__keyring }}"
-    dest: /usr/share/keyrings/librewolf.gpg
-    mode: '644'
-    owner: root
-    group: root
-  when: "'librewolf' not in ansible_facts.packages and ansible_os_family == 'Debian'"
+  l3d.linux.extrepo:
+    action: 'enable'
+    repository: "librewolf"
+  register: _librewolf_repo
 
-- name: Add repo to list of sources
+- name: Update librewolf via extrepo
   become: true
-  ansible.builtin.template:
-    src: 'templates/librewolf.sources.j2'
-    dest: '/etc/apt/sources.list.d/librewolf.sources'
-    mode: '644'
-    owner: 'root'
-    group: 'root'
-  when: "'librewolf' not in ansible_facts.packages and ansible_os_family == 'Debian'"
+  l3d.linux.extrepo:
+    action: 'update'
+    repository: "librewolf"
+  changed_when: _librewolf_repo.changed
+
+- name: Update apt repo-cache on debian/ubuntu hosts
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 0
